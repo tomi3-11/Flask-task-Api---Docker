@@ -1,0 +1,28 @@
+All the docker scripts used in this api project
+
+1. Create the Dockerfile and file in the details
+2. Commands
+	Build image: sudo docker build -t <image-name> .
+	run container: sudo docker run -d -p 5000:5000 --name <container-name> <image-name>
+3. Check your browser at: http://localhost:5000 or curl http://localhost:5000
+4. You should see a json message.
+5. Checking all images: 
+	sudo docker images
+6. Checking all running cotainers
+	sudo docker ps OR sudo docker ps -a
+7. Stop a container
+	sudo docker stop <container-name>
+	OR
+	sudo docker stop <container-ID>
+8. Remove a container
+	sudo docker rm <container-name>
+	OR
+	sudo docker rm <container-ID>
+9. Delete the image build
+	sudo docker rmi <image-name>
+	OR
+	sudo docker rmi <image_id>
+10. Remove all system wide containers and 'unused' images
+	sudo docker system prune -a
+	(So becareful here)
+
