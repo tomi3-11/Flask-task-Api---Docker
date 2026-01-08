@@ -58,12 +58,12 @@ def create_task():
         db.session.add(new_task)
         db.session.commit()
 
-        return {"message": f"Task <{Task.title}> added successfully"}
+        return jsonify({"message": f"Task <{Task.title}> added successfully"}), 200
 
 
-@app.route('/edit', methods=["POST"])
+@app.route('/edit/<int:task_id>', methods=["POST"])
 def edit_task(task_id):
-    tasks = Task.query.filter_by(id=task_id)
+    tasks = Task.query.get_or_404(task_id)
     
     # Json format
     data = request.get_json()
@@ -75,15 +75,16 @@ def edit_task(task_id):
 
     db.session.commit()
 
-    return {"message": f"Task <{Task.title}> updated successfully"}
+    return jsonify({"message": f"Task <{Task.title}> updated successfully"}), 200
 
-@app.route('/delete', methods=["POST"])
+@app.route('/delete/<int:task_id>', methods=["DELETE"])
 def delete_task(task_id):
-    tasks = Task.query.filter_by(id=task_id)
+    task = Task.query.get_or_404(task_id)
 
-    db.session.delete()
+    db.session.delete(task)
+    db.session.commit()
 
-    return {"message": "Deleted Successfully"}
+    return jsonify({"message": "Deleted Successfully"}), 200
 
 # Entry point
 if __name__ == "__main__":
