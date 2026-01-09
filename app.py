@@ -40,6 +40,20 @@ def all_tasks():
                 ]
             })
 
+
+@app.route('/detail/<int:task_id>', methods=["GET"])
+def get_task(task_id):
+    task = Task.query.get_or_404(task_id)
+
+    return jsonify({
+        "message": "Task retrieved successfully",
+        "Details": {
+            "id": str(task.id),
+            "title": task.title,
+            "description": task.description
+           }
+        })
+
 @app.route('/create', methods=["POST"])
 def create_task():
     if request.method == "POST":
